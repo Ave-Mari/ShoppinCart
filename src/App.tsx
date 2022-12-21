@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 
 //components
+import Item from './Item/Item'
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import LinearProgress  from '@mui/material/LinearProgress';
@@ -10,7 +11,7 @@ import Grid  from '@mui/material/Grid';
 //import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from '@mui/material/Badge';
 
-//import { Wrapper } from './App.styles';
+import { Wrapper } from './App.styles';
 
 //Types
 export type CartItemType = {
@@ -37,7 +38,7 @@ export default function App() {
 
   const getTotalItems = () => null;
 
-  const handleAddToCart = () => null;
+  const handleAddToCart = (clickedItem: CartItemType) => null;
 
   const handleRemoveCart = () => null;
 
@@ -47,7 +48,15 @@ export default function App() {
 
   return (
     <>
-    My shopping Cart
+    <Wrapper>
+      <Grid container spacing={3}>
+        {data?.map((item) => (
+          <Grid item key={item.id} xs={12} sm={4}> 
+          <Item item={item} handleAddToCart={handleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
     </>
   )
 }
