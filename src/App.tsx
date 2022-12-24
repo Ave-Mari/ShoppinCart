@@ -29,7 +29,9 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
 
 export default function App() {
+  const [cartOpen, setCartOpen] = useState(false);
 
+  const [cartItems, setCartItems] = useState([] as CartItemType[])
   const  { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
@@ -49,6 +51,9 @@ export default function App() {
   return (
     <>
     <Wrapper>
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+        
+      </Drawer>
       <Grid container spacing={3}>
         {data?.map((item) => (
           <Grid item key={item.id} xs={12} sm={4}> 
