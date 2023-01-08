@@ -38,7 +38,8 @@ export default function App() {
   )
   console.log(data);
 
-  const getTotalItems = (items: CartItemType[]) => null;
+  const getTotalItems = (items: CartItemType[]) => 
+  items.reduce((ack: number, items) => ack + items.amount, 0);
 
   const handleAddToCart = (clickedItem: CartItemType) => null;
 
