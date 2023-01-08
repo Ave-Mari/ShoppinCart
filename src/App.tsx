@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 
 //components
 import Item from './Item/Item'
+import Cart from './Cart/Cart';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import LinearProgress  from '@mui/material/LinearProgress';
@@ -53,7 +54,11 @@ export default function App() {
     <>
     <Wrapper>
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        Cart here
+        <Cart  
+        cartItems={cartItems} 
+        addToCart={handleAddToCart} 
+        removeFromCart={handleRemoveCart}
+        />
       </Drawer>
     <StyledButton onClick={() => setCartOpen(true)}>
       <Badge badgeContent={getTotalItems(cartItems)} color="error">
