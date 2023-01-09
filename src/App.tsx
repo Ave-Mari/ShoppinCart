@@ -57,7 +57,18 @@ export default function App() {
     })
   };
 
-  const handleRemoveCart = () => null;
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems(prev => 
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, {...item, amount: item.amount - 1}]
+        } else {
+          return [...ack, item]
+        }
+      }, [] as CartItemType[])
+    );
+  };
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>
@@ -70,7 +81,7 @@ export default function App() {
         <Cart  
         cartItems={cartItems} 
         addToCart={handleAddToCart} 
-        removeFromCart={handleRemoveCart}
+        removeFromCart={handleRemoveFromCart}
         />
       </Drawer>
     <StyledButton onClick={() => setCartOpen(true)}>
